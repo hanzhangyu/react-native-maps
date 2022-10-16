@@ -1,6 +1,6 @@
 //
-//  AIRGMSPolygon.m
-//  AirMaps
+//  RNMGMSPolygon.m
+//  Maps
 //
 //  Created by Gerardo Pacheco 02/05/2017.
 //

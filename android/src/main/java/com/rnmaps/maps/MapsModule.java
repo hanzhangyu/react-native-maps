@@ -40,16 +40,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-@ReactModule(name = MapModule.NAME)
-public class MapModule extends ReactContextBaseJavaModule {
+@ReactModule(name = MapsModule.NAME)
+public class MapsModule extends ReactContextBaseJavaModule {
 
-  public static final String NAME = "AirMapModule";
+  public static final String NAME = "MapsModule";
   private static final String SNAPSHOT_RESULT_FILE = "file";
   private static final String SNAPSHOT_RESULT_BASE64 = "base64";
   private static final String SNAPSHOT_FORMAT_PNG = "png";
   private static final String SNAPSHOT_FORMAT_JPG = "jpg";
 
-  public MapModule(ReactApplicationContext reactContext) {
+  public MapsModule(ReactApplicationContext reactContext) {
     super(reactContext);
   }
 
@@ -100,11 +100,11 @@ public class MapModule extends ReactContextBaseJavaModule {
       public void execute(NativeViewHierarchyManager nvhm) {
         MapView view = (MapView) nvhm.resolveView(tag);
         if (view == null) {
-          promise.reject("AirMapView not found");
+          promise.reject("RNMMapView not found");
           return;
         }
         if (view.map == null) {
-          promise.reject("AirMapView.map is not valid");
+          promise.reject("RNMMapView.map is not valid");
           return;
         }
         view.map.snapshot(new GoogleMap.SnapshotReadyCallback() {
@@ -126,7 +126,7 @@ public class MapModule extends ReactContextBaseJavaModule {
               FileOutputStream outputStream;
               try {
                 tempFile =
-                    File.createTempFile("AirMapSnapshot", "." + format, context.getCacheDir());
+                    File.createTempFile("RNMMapSnapshot", "." + format, context.getCacheDir());
                 outputStream = new FileOutputStream(tempFile);
               } catch (Exception e) {
                 promise.reject(e);
@@ -162,11 +162,11 @@ public class MapModule extends ReactContextBaseJavaModule {
       {
         MapView view = (MapView) nvhm.resolveView(tag);
         if (view == null) {
-          promise.reject("AirMapView not found");
+          promise.reject("RNMMapView not found");
           return;
         }
         if (view.map == null) {
-          promise.reject("AirMapView.map is not valid");
+          promise.reject("RNMMapView.map is not valid");
           return;
         }
 
@@ -199,11 +199,11 @@ public class MapModule extends ReactContextBaseJavaModule {
       {
         MapView view = (MapView) nvhm.resolveView(tag);
         if (view == null) {
-          promise.reject("AirMapView not found");
+          promise.reject("RNMMapView not found");
           return;
         }
         if (view.map == null) {
-          promise.reject("AirMapView.map is not valid");
+          promise.reject("RNMMapView.map is not valid");
           return;
         }
         if (coordinate == null ||
@@ -260,11 +260,11 @@ public class MapModule extends ReactContextBaseJavaModule {
       {
         MapView view = (MapView) nvhm.resolveView(tag);
         if (view == null) {
-          promise.reject("AirMapView not found");
+          promise.reject("RNMMapView not found");
           return;
         }
         if (view.map == null) {
-          promise.reject("AirMapView.map is not valid");
+          promise.reject("RNMMapView.map is not valid");
           return;
         }
 
@@ -298,12 +298,12 @@ public class MapModule extends ReactContextBaseJavaModule {
         MapView view = (MapView) nvhm.resolveView(tag);
         if (view == null)
         {
-          promise.reject("AirMapView not found");
+          promise.reject("RNMMapView not found");
           return;
         }
         if (view.map == null)
         {
-          promise.reject("AirMapView.map is not valid");
+          promise.reject("RNMMapView.map is not valid");
           return;
         }
 
@@ -330,11 +330,11 @@ public class MapModule extends ReactContextBaseJavaModule {
       {
         MapView view = (MapView) nvhm.resolveView(tag);
         if (view == null) {
-          promise.reject("AirMapView not found");
+          promise.reject("RNMMapView not found");
           return;
         }
         if (view.map == null) {
-          promise.reject("AirMapView.map is not valid");
+          promise.reject("RNMMapView.map is not valid");
           return;
         }
 
@@ -370,7 +370,7 @@ public class MapModule extends ReactContextBaseJavaModule {
         MapsInitializer.initialize(context, MapsInitializer.Renderer.LATEST, new OnMapsSdkInitializedCallback() {
           @Override
           public void onMapsSdkInitialized(@NonNull MapsInitializer.Renderer renderer) {
-            Log.d("AirMapRenderer", renderer.toString());
+            Log.d("RNMMapRenderer", renderer.toString());
             promise.resolve(renderer.toString());
           }
         });

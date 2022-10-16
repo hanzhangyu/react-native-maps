@@ -7,7 +7,7 @@
 
 @implementation RNMGoogleMapOverlayManager
 
-RCT_EXPORT_MODULE(AIRGoogleMapOverlayManager)
+RCT_EXPORT_MODULE(RNMGoogleMapOverlay)
 
 - (UIView *)view
 {

@@ -1,6 +1,6 @@
 //
-//  AIRGoogleMap.h
-//  AirMaps
+//  RNMGoogleMap.h
+//  Maps
 //
 //  Created by Gil Birman on 9/1/16.
 //

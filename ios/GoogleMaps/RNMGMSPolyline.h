@@ -1,6 +1,6 @@
 //
-//  AIRGMSPolyline.h
-//  AirMaps
+//  RNMGMSPolyline.h
+//  Maps
 //
 //  Created by Guilherme Pontes 04/05/2017.
 //

@@ -23,7 +23,7 @@
 
 @implementation RNMGoogleMapPolylineManager
 
-RCT_EXPORT_MODULE(AIRGoogleMapPolylineManager)
+RCT_EXPORT_MODULE(RNMGoogleMapPolyline)
 
 - (UIView *)view
 {

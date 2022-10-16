@@ -250,17 +250,17 @@ public class MapView extends com.google.android.gms.maps.MapView implements Goog
       @Override
       public boolean onMarkerClick(Marker marker) {
         WritableMap event;
-        MapMarker airMapMarker = getMarkerMap(marker);
+        MapMarker mapMarker = getMarkerMap(marker);
 
         event = makeClickEventData(marker.getPosition());
         event.putString("action", "marker-press");
-        event.putString("id", airMapMarker.getIdentifier());
+        event.putString("id", mapMarker.getIdentifier());
         manager.pushEvent(context, view, "onMarkerPress", event);
 
         event = makeClickEventData(marker.getPosition());
         event.putString("action", "marker-press");
-        event.putString("id", airMapMarker.getIdentifier());
-        manager.pushEvent(context, airMapMarker, "onPress", event);
+        event.putString("id", mapMarker.getIdentifier());
+        manager.pushEvent(context, mapMarker, "onPress", event);
 
         // Return false to open the callout info window and center on the marker
         // https://developers.google.com/android/reference/com/google/android/gms/maps/GoogleMap
@@ -1341,21 +1341,21 @@ public class MapView extends com.google.android.gms.maps.MapView implements Goog
   }
 
   private MapMarker getMarkerMap(Marker marker) {
-    MapMarker airMarker = markerMap.get(marker);
+    MapMarker mapMarker = markerMap.get(marker);
 
-    if (airMarker != null) {
-      return airMarker;
+    if (mapMarker != null) {
+      return mapMarker;
     }
 
     for (Map.Entry<Marker, MapMarker> entryMarker : markerMap.entrySet()) {
       if (entryMarker.getKey().getPosition().equals(marker.getPosition())
           && entryMarker.getKey().getTitle().equals(marker.getTitle())) {
-        airMarker = entryMarker.getValue();
+        mapMarker = entryMarker.getValue();
         break;
       }
     }
 
-    return airMarker;
+    return mapMarker;
   }
 
   @Override

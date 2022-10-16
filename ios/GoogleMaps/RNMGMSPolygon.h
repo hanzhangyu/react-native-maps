@@ -1,6 +1,6 @@
 //
 //  GMSPolygon.h
-//  AirMaps
+//  Maps
 //
 //  Created by Gerardo Pacheco 02/05/2017.
 //

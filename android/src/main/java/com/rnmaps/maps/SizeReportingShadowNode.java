@@ -14,7 +14,7 @@ import com.facebook.react.uimanager.UIViewOperationQueue;
 import java.util.HashMap;
 import java.util.Map;
 
-// Custom LayoutShadowNode implementation used in conjunction with the AirMapManager
+// Custom LayoutShadowNode implementation used in conjunction with the MapManager
 // which sends the width/height of the view after layout occurs.
 public class SizeReportingShadowNode extends LayoutShadowNode {
 

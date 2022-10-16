@@ -13,7 +13,7 @@
 #import <React/RCTView.h>
 
 @implementation RNMGoogleMapCalloutSubviewManager
-RCT_EXPORT_MODULE(AIRGoogleMapCalloutSubviewManager)
+RCT_EXPORT_MODULE(RNMGoogleMapCalloutSubview)
 
 - (UIView *)view
 {

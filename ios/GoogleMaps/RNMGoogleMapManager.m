@@ -41,7 +41,7 @@ static NSString *const RCTMapViewKey = @"MapView";
 
 @implementation RNMGoogleMapManager
 
-RCT_EXPORT_MODULE(AIRGoogleMapManager)
+RCT_EXPORT_MODULE(RNMGoogleMap)
 
 - (UIView *)view
 {
