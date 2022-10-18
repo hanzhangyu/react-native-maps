@@ -1,6 +1,5 @@
 package com.rnmaps.maps;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.location.Address;
@@ -20,7 +19,6 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
-import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.uimanager.NativeViewHierarchyManager;
 import com.facebook.react.uimanager.UIBlock;
 import com.facebook.react.uimanager.UIManagerModule;
@@ -40,22 +38,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-@ReactModule(name = MapsModule.NAME)
-public class MapsModule extends ReactContextBaseJavaModule {
+public class MapViewModule extends ReactContextBaseJavaModule {
 
-  public static final String NAME = "MapsModule";
+  private final ReactApplicationContext context;
   private static final String SNAPSHOT_RESULT_FILE = "file";
   private static final String SNAPSHOT_RESULT_BASE64 = "base64";
   private static final String SNAPSHOT_FORMAT_PNG = "png";
   private static final String SNAPSHOT_FORMAT_JPG = "jpg";
 
-  public MapsModule(ReactApplicationContext reactContext) {
+  public MapViewModule(ReactApplicationContext reactContext) {
     super(reactContext);
+    context = reactContext;
   }
 
   @Override
   public String getName() {
-    return NAME;
+    return "RNMMapViewModule";
   }
 
   @Override
@@ -63,10 +61,6 @@ public class MapsModule extends ReactContextBaseJavaModule {
     final Map<String, Object> constants = new HashMap<>();
     constants.put("legalNotice", "This license information is displayed in Settings > Google > Open Source on any device running Google Play services.");
     return constants;
-  }
-
-  public Activity getActivity() {
-    return getCurrentActivity();
   }
 
   public static void closeQuietly(Closeable closeable) {
@@ -81,7 +75,6 @@ public class MapsModule extends ReactContextBaseJavaModule {
   public void takeSnapshot(final int tag, final ReadableMap options, final Promise promise) {
 
     // Parse and verity options
-    final ReactApplicationContext context = getReactApplicationContext();
     final String format = options.hasKey("format") ? options.getString("format") : "png";
     final Bitmap.CompressFormat compressFormat =
         format.equals(SNAPSHOT_FORMAT_PNG) ? Bitmap.CompressFormat.PNG :
@@ -95,8 +88,7 @@ public class MapsModule extends ReactContextBaseJavaModule {
     final String result = options.hasKey("result") ? options.getString("result") : "file";
 
     // Add UI-block so we can get a valid reference to the map-view
-    UIManagerModule uiManager = context.getNativeModule(UIManagerModule.class);
-    uiManager.addUIBlock(new UIBlock() {
+    context.getNativeModule(UIManagerModule.class).addUIBlock(new UIBlock() {
       public void execute(NativeViewHierarchyManager nvhm) {
         MapView view = (MapView) nvhm.resolveView(tag);
         if (view == null) {
@@ -152,10 +144,7 @@ public class MapsModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void getCamera(final int tag, final Promise promise) {
-    final ReactApplicationContext context = getReactApplicationContext();
-
-    UIManagerModule uiManager = context.getNativeModule(UIManagerModule.class);
-    uiManager.addUIBlock(new UIBlock()
+    context.getNativeModule(UIManagerModule.class).addUIBlock(new UIBlock()
     {
       @Override
       public void execute(NativeViewHierarchyManager nvhm)
@@ -189,10 +178,7 @@ public class MapsModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void getAddressFromCoordinates(final int tag, final ReadableMap coordinate, final Promise promise) {
-    final ReactApplicationContext context = getReactApplicationContext();
-
-    UIManagerModule uiManager = context.getNativeModule(UIManagerModule.class);
-    uiManager.addUIBlock(new UIBlock()
+    context.getNativeModule(UIManagerModule.class).addUIBlock(new UIBlock()
     {
       @Override
       public void execute(NativeViewHierarchyManager nvhm)
@@ -244,16 +230,14 @@ public class MapsModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void pointForCoordinate(final int tag, ReadableMap coordinate, final Promise promise) {
-    final ReactApplicationContext context = getReactApplicationContext();
-    final double density = (double) context.getResources().getDisplayMetrics().density;
+    final double density = context.getResources().getDisplayMetrics().density;
 
     final LatLng coord = new LatLng(
             coordinate.hasKey("latitude") ? coordinate.getDouble("latitude") : 0.0,
             coordinate.hasKey("longitude") ? coordinate.getDouble("longitude") : 0.0
     );
 
-    UIManagerModule uiManager = context.getNativeModule(UIManagerModule.class);
-    uiManager.addUIBlock(new UIBlock()
+    context.getNativeModule(UIManagerModule.class).addUIBlock(new UIBlock()
     {
       @Override
       public void execute(NativeViewHierarchyManager nvhm)
@@ -281,16 +265,14 @@ public class MapsModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void coordinateForPoint(final int tag, ReadableMap point, final Promise promise) {
-    final ReactApplicationContext context = getReactApplicationContext();
-    final double density = (double) context.getResources().getDisplayMetrics().density;
+    final double density = context.getResources().getDisplayMetrics().density;
 
     final Point pt = new Point(
             point.hasKey("x") ? (int)(point.getDouble("x") * density) : 0,
             point.hasKey("y") ? (int)(point.getDouble("y") * density) : 0
     );
 
-    UIManagerModule uiManager = context.getNativeModule(UIManagerModule.class);
-    uiManager.addUIBlock(new UIBlock()
+    context.getNativeModule(UIManagerModule.class).addUIBlock(new UIBlock()
     {
       @Override
       public void execute(NativeViewHierarchyManager nvhm)
@@ -320,10 +302,7 @@ public class MapsModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void getMapBoundaries(final int tag, final Promise promise) {
-    final ReactApplicationContext context = getReactApplicationContext();
-
-    UIManagerModule uiManager = context.getNativeModule(UIManagerModule.class);
-    uiManager.addUIBlock(new UIBlock()
+    context.getNativeModule(UIManagerModule.class).addUIBlock(new UIBlock()
     {
       @Override
       public void execute(NativeViewHierarchyManager nvhm)
@@ -359,10 +338,7 @@ public class MapsModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void enableLatestRenderer(final Promise promise) {
-    final ReactApplicationContext context = getReactApplicationContext();
-
-    UIManagerModule uiManager = context.getNativeModule(UIManagerModule.class);
-    uiManager.addUIBlock(new UIBlock()
+    context.getNativeModule(UIManagerModule.class).addUIBlock(new UIBlock()
     {
       @Override
       public void execute(NativeViewHierarchyManager nvhm)
